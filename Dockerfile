@@ -53,6 +53,77 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
 # give docker the rights to access the X-Server
 # ref: https://forums.docker.com/t/start-a-gui-application-as-root-in-a-ubuntu-container/17069
 
+RUN mkdir -p /SOURCE
+
+RUN cd /SOURCE ;\
+    wget https://sourceforge.net/projects/boost/files/boost/1.61.0/boost_1_61_0.tar.bz2
+
+RUN cd /SOURCE ;\
+    tar --bzip2 -xf boost_1_61_0.tar.bz2
+
+RUN apt-get -y update ;\
+    apt-get -y install \
+    build-essential \
+    autotools-dev \
+    libicu-dev \
+    libbz2-dev
+
+RUN apt-get -y install python-dev
+
+RUN cd /SOURCE ;\
+    cd boost_1_61_0 ;\
+    ./bootstrap.sh ;\
+    ./b2 install -j4
+
+RUN cd /SOURCE ;\
+    wget -O eigen_3_2_8.tar.bz2 http://bitbucket.org/eigen/eigen/get/3.2.8.tar.bz2
+
+RUN cd /SOURCE ;\
+    tar --bzip2 -xf eigen_3_2_8.tar.bz2 ;\
+    mv eigen-eigen-* eigen_3_2_8
+
+RUN cd /SOURCE ;\
+    cd eigen_3_2_8 ;\
+    mkdir build ;\
+    cd build ;\
+    cmake .. ;\
+    make -j4
+
+RUN cd /SOURCE ;\
+    wget -O flann_1_8_4-src.zip http://www.cs.ubc.ca/research/flann/uploads/FLANN/flann-1.8.4-src.zip
+
+RUN cd /SOURCE ;\
+    unzip flann_1_8_4-src.zip ;\
+    mv flann-1.8.4-src flann_1_8_4
+
+RUN cd /SOURCE ;\
+    cd flann_1_8_4 ;\
+    mkdir build ;\
+    cd build ;\
+    cmake .. ;\
+    make -j4
+
+RUN cd /SOURCE ;\
+    git clone https://github.com/michaelchanwahyan/cmake-3.10.git ;\
+    cd cmake-3.10 ;\
+    bash preparation.sh
+
+RUN cd /SOURCE ;\
+    wget -O vtk_7_0_0.tar.bz2 https://gitlab.kitware.com/vtk/vtk/-/archive/v7.0.0/vtk-v7.0.0.tar.bz2
+
+RUN cd /SOURCE ;\
+    tar --bzip2 -xf vtk_7_0_0.tar.bz2 ;\
+    mv vtk-v7.0.0 vtk_7_0_0
+
+RUN apt-get install -y freeglut3-dev
+
+RUN cd /SOURCE ;\
+    cd vtk_7_0_0 ;\
+    mkdir build ;\
+    cd build ;\
+    cmake .. ;\
+    make -j4
+
 # RUN apt-get -y update ;\
 #     apt-get -y install libcurl4-openssl-dev libssl-dev libeigen3-dev ;\
 #     apt-get -y update ;\
@@ -75,7 +146,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
 #     apt-get -y install libpcl-dev ;\
 
 
-COPY [ ".bashrc" , ".vimrc"               , "/root/"                 ]
+COPY [ ".bashrc" , ".vimrc" , "/root/" ]
 
 EXPOSE 9090 9999
 CMD [ "/bin/bash" ]
