@@ -124,6 +124,32 @@ RUN cd /SOURCE ;\
     cmake .. ;\
     make -j4
 
+RUN cd /SOURCE ;\
+    git clone https://github.com/PointCloudLibrary/pcl.git ;\
+    cd pcl ;\
+    git checkout tags/pcl-1.8.0
+
+RUN cd /SOURCE ;\
+    cd eigen_3_2_8/build ;\
+    make install
+
+RUN cd /SOURCE ;\
+    cd flann_1_8_4/build ;\
+    make install
+
+RUN cd /SOURCE ;\
+    cd vtk_7_0_0/build ;\
+    make install
+
+
+
+# RUN cd /SOURCE ;\
+#     cd pcl ;\
+#     mkdir build ;\
+#     cd build ;\
+#     cmake .. ;\
+#     make -j8
+
 # RUN apt-get -y update ;\
 #     apt-get -y install libcurl4-openssl-dev libssl-dev libeigen3-dev ;\
 #     apt-get -y update ;\
