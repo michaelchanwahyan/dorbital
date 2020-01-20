@@ -141,14 +141,12 @@ RUN cd /SOURCE ;\
     cd vtk_7_0_0/build ;\
     make install
 
-
-
-# RUN cd /SOURCE ;\
-#     cd pcl ;\
-#     mkdir build ;\
-#     cd build ;\
-#     cmake .. ;\
-#     make -j8
+RUN cd /SOURCE ;\
+    cd pcl ;\
+    mkdir build ;\
+    cd build ;\
+    cmake .. ;\
+    make -j8
 
 # RUN apt-get -y update ;\
 #     apt-get -y install libcurl4-openssl-dev libssl-dev libeigen3-dev ;\
