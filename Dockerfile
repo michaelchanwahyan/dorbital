@@ -148,6 +148,14 @@ RUN cd /SOURCE ;\
     cmake .. ;\
     make -j8
 
+RUN cd /SOURCE ;\
+    cd pcl/build ;\
+    make install
+
+RUN apt-get -y install libjsoncpp-dev
+
+RUN apt-get -y install libpcap-dev
+
 # RUN apt-get -y update ;\
 #     apt-get -y install libcurl4-openssl-dev libssl-dev libeigen3-dev ;\
 #     apt-get -y update ;\
@@ -169,6 +177,30 @@ RUN cd /SOURCE ;\
 #     apt-get -y update ;\
 #     apt-get -y install libpcl-dev ;\
 
+ENV PATH $PATH:/SOURCE/orbital/build
+ENV PATH $PATH:/SOURCE/pcl/build
+ENV PATH $PATH:/SOURCE/pcl/build/lib
+ENV PATH $PATH:/SOURCE/vtk_7_0_0/build
+ENV PATH $PATH:/SOURCE/vtk_7_0_0/build/lib
+
+ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/lib
+ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/SOURCE/orbital/build
+ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/SOURCE/pcl/build
+ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/SOURCE/pcl/build/lib
+ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/SOURCE/vtk_7_0_0/build
+ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/SOURCE/vtk_7_0_0/build/lib
+
+ENV LIBRARY_PATH $LIBRARY_PATH
+ENV LIBRARY_PATH $LIBRARY_PATH:/SOURCE/pcl/build
+ENV LIBRARY_PATH $LIBRARY_PATH:/SOURCE/pcl/build/lib
+ENV LIBRARY_PATH $LIBRARY_PATH:/SOURCE/vtk_7_0_0/build
+ENV LIBRARY_PATH $LIBRARY_PATH:/SOURCE/vtk_7_0_0/build/lib
+
+ENV CPLUS_INCLUDE_PATH $CPLUS_INCLUDE_PATH:/SOURCE/orbital
+
+ENV BOOST_SYSTEM_LIBRARY /SOURCE/boost-1.61.0/bin.v2/libs
+
+RUN mkdir /data
 
 COPY [ ".bashrc" , ".vimrc" , "/root/" ]
 
