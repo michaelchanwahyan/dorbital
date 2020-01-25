@@ -204,5 +204,5 @@ RUN mkdir /data
 
 COPY [ ".bashrc" , ".vimrc" , "/root/" ]
 
-EXPOSE 9090 9999
+#EXPOSE 9090 9999
 CMD [ "/bin/bash" ]

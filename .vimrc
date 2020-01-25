@@ -29,7 +29,7 @@ vnoremap <leader>p "_dP
 "map <F6>    :!python3 %<cr>
 
 syn on
-colorscheme default
+"colorscheme default
 "colorscheme blue
 "colorscheme darkblue
 "colorscheme default.vim
