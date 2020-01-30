@@ -87,7 +87,7 @@ RUN cd /SOURCE ;\
     mkdir build ;\
     cd build ;\
     cmake .. ;\
-    make -j4
+    make -j2
 
 RUN cd /SOURCE ;\
     wget -O flann_1_8_4-src.zip http://www.cs.ubc.ca/research/flann/uploads/FLANN/flann-1.8.4-src.zip
@@ -101,7 +101,7 @@ RUN cd /SOURCE ;\
     mkdir build ;\
     cd build ;\
     cmake .. ;\
-    make -j4
+    make -j2
 
 RUN cd /SOURCE ;\
     git clone https://github.com/michaelchanwahyan/cmake-3.10.git ;\
@@ -122,7 +122,7 @@ RUN cd /SOURCE ;\
     mkdir build ;\
     cd build ;\
     cmake .. ;\
-    make -j4
+    make -j2
 
 RUN cd /SOURCE ;\
     git clone https://github.com/PointCloudLibrary/pcl.git ;\
@@ -146,7 +146,7 @@ RUN cd /SOURCE ;\
     mkdir build ;\
     cd build ;\
     cmake .. ;\
-    make -j8
+    make -j2
 
 RUN cd /SOURCE ;\
     cd pcl/build ;\
