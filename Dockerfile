@@ -34,11 +34,11 @@ RUN apt-get -y update ;\
         build-essential autotools-dev libicu-dev libbz2-dev python-dev \
         freeglut3-dev libjsoncpp-dev libpcap-dev
 
-#RUN cd /SOURCE ;\
-#    wget https://sourceforge.net/projects/boost/files/boost/1.61.0/boost_1_61_0.tar.bz2 ;\
-#    tar --bzip2 -xf boost_1_61_0.tar.bz2 ; rm -f boost_1_61_0.tar.bz2 ;\
-#    cd boost_1_61_0 ; ./bootstrap.sh ; ./b2 install -j1
-#
+RUN cd /SOURCE ;\
+    wget https://sourceforge.net/projects/boost/files/boost/1.61.0/boost_1_61_0.tar.bz2 ;\
+    tar --bzip2 -xf boost_1_61_0.tar.bz2 ; rm -f boost_1_61_0.tar.bz2 ;\
+    cd boost_1_61_0 ; ./bootstrap.sh ; ./b2 install -j1
+
 #RUN cd /SOURCE ;\
 #    wget -O eigen_3_2_8.tar.bz2 http://bitbucket.org/eigen/eigen/get/3.2.8.tar.bz2 ;\
 #    tar --bzip2 -xf eigen_3_2_8.tar.bz2 ; rm -f eigen_3_2_8.tar.bz2 ; mv eigen-eigen-* eigen_3_2_8 ;\
