@@ -12,12 +12,9 @@ ENV SHELL=/bin/bash \
     CPLUS_INCLUDE_PATH=/SOURCE/orbital \
     BOOST_SYSTEM_LIBRARY=/SOURCE/boost-1.61.0/bin.v2/libs
 
-#RUN cp /etc/apt/sources.list /etc/apt/sources.list.bak ;\
-#    cat /etc/apt/sources.list.bak | \
-#    sed 's/archive/hk.archive/' > /etc/apt/sources.list ;\
-#    apt-get -y update ;\
-#    apt-get -y upgrade
-#
+RUN apt-get -y update ;\
+    apt-get -y upgrade
+
 #RUN apt-get -y install screen apt-utils htop wget curl net-tools \
 #        cmake gcc make g++ gfortran ca-certificates musl-dev fortune \
 #        vim nano git apt-transport-https bc doxygen firefox cowsay sl
