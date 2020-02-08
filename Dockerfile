@@ -60,7 +60,56 @@ RUN cd /SOURCE ;\
 RUN cd /SOURCE ;\
     git clone https://github.com/PointCloudLibrary/pcl.git ;\
     cd pcl ; git checkout tags/pcl-1.8.0 ; rm -rf .git ;\
-    mkdir build ; cd build ; cmake .. ; make -j2 ; make install
+    mkdir build ; cd build ; cmake .. ; make -j2 ; make install ;\
+    find ./ -type f \( -iname \*.backup               -o \
+                       -iname \*.check_cache          -o \
+                       -iname \*.dot                  -o \
+                       -iname \*.el                   -o \
+                       -iname \*.icns                 -o \
+                       -iname \*.ico                  -o \
+                       -iname \*.log                  -o \
+                       -iname \*.m                    -o \
+                       -iname \*.mm                   -o \
+                       -iname \*.rc                   -o \
+                       -iname \*.svg                  -o \
+                       -iname \*.yml                  -o \
+                       -iname \*.bmp                  -o \
+                       -iname \*.out                  -o \
+                       -iname \*.pro                  -o \
+                       -iname \*.yaml                 -o \
+                       -iname \*.bin                  -o \
+                       -iname \*.cxx                  -o \
+                       -iname \*.html                 -o \
+                       -iname \*.md                   -o \
+                       -iname \*.qrc                  -o \
+                       -iname \*.css                  -o \
+                       -iname \*.frag                 -o \
+                       -iname \*.sh                   -o \
+                       -iname \*.vert                 -o \
+                       -iname \*.vtk                  -o \
+                       -iname \*.pclzf                -o \
+                       -iname \*.py                   -o \
+                       -iname \*.tiff                 -o \
+                       -iname \*.xml                  -o \
+                       -iname \*.gif                  -o \
+                       -iname \*.hh                   -o \
+                       -iname \*.in                   -o \
+                       -iname \*.info                 -o \
+                       -iname \*.ui                   -o \
+                       -iname \*.doxy                 -o \
+                       -iname \*.0                    -o \
+                       -iname \*.pc                   -o \
+                       -iname \*.marks                -o \
+                       -iname \*.pcd                  -o \
+                       -iname \*.cu                   -o \
+                       -iname \*.internal             -o \
+                       -iname \*.rst                  -o \
+                       -iname \*.includecache         -o \
+                       -iname \*.jpg                  -o \
+                       -iname \*.png                  -o \
+                       -iname \*.txt                  -o \
+                       -iname \*.cmake                -o \
+                       -iname \*.make                 \)
 
 COPY [ ".bashrc" , ".vimrc" , "/root/" ]
 
