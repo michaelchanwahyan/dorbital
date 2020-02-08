@@ -49,11 +49,11 @@ RUN cd /SOURCE ;\
     unzip flann_1_8_4-src.zip ; rm -f flann_1_8_4-src.zip ; mv flann-1.8.4-src flann_1_8_4 ;\
     cd flann_1_8_4 ; mkdir build ; cd build ; cmake .. ; make -j1 ; make install
 
-#RUN cd /SOURCE ;\
-#    wget -O vtk_7_0_0.tar.bz2 https://gitlab.kitware.com/vtk/vtk/-/archive/v7.0.0/vtk-v7.0.0.tar.bz2 ;\
-#    tar --bzip2 -xf vtk_7_0_0.tar.bz2 ; rm -f vtk_7_0_0.tar.bz2 ; mv vtk-v7.0.0 vtk_7_0_0 ;\
-#    cd vtk_7_0_0 ; mkdir build ; cd build ; cmake .. ; make -j1 ; make install
-#
+RUN cd /SOURCE ;\
+    wget -O vtk_7_0_0.tar.bz2 https://gitlab.kitware.com/vtk/vtk/-/archive/v7.0.0/vtk-v7.0.0.tar.bz2 ;\
+    tar --bzip2 -xf vtk_7_0_0.tar.bz2 ; rm -f vtk_7_0_0.tar.bz2 ; mv vtk-v7.0.0 vtk_7_0_0 ;\
+    cd vtk_7_0_0 ; mkdir build ; cd build ; cmake .. ; make -j1 ; make install
+
 #RUN cd /SOURCE ;\
 #    git clone https://github.com/PointCloudLibrary/pcl.git ;\
 #    cd pcl ; git checkout tags/pcl-1.8.0 ; rm -rf .git ;\
