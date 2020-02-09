@@ -39,16 +39,26 @@ bash rundocker.sh
 The boost, eigen, flann, vtk, and pcl source and header files are all placed under the directory
 
 ```
-/SOURCE
+/SOURCE/boost_1_61_0
+
+/SOURCE/eigen_3_2_8
+
+/SOURCE/flann_1_8_4
+
+/SOURCE/vtk_7_0_0
+
+/SOURCE/pcl
 ```
 
-the library files are all installed into
+while the library files have been installed into
 
 ```
 /usr/local/lib
 ```
 
-## Remark
+during make and install
+
+## Remark 1
 
 macOS may encounter the following build error during PCL library compilation:
 
@@ -58,3 +68,8 @@ c++: internal compiler error: Killed (program cc1plus)
 
 It is yet to be fixed using some know-how ...
 
+## Remark 2
+
+Docker Hub build time out in pcl compilation layer
+
+so that i need to build this layer on my own and push to docker hub
