@@ -1,6 +1,6 @@
 # Dockerfile for building general development
 # environment for orbital
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 LABEL maintainer "michaelchan_wahyan@yahoo.com.hk"
 
 ENV SHELL=/bin/bash \
@@ -50,14 +50,17 @@ RUN cd /SOURCE ;\
     cd flann_1_8_4 ; mkdir build ; cd build ; cmake .. ; make -j1 ; make install
 
 RUN cd /SOURCE ;\
-    wget -O vtk_7_0_0.tar.bz2 https://gitlab.kitware.com/vtk/vtk/-/archive/v7.0.0/vtk-v7.0.0.tar.bz2 ;\
-    tar --bzip2 -xf vtk_7_0_0.tar.bz2 ; rm -f vtk_7_0_0.tar.bz2 ; mv vtk-v7.0.0 vtk_7_0_0 ;\
-    cd vtk_7_0_0 ; mkdir build ; cd build ; cmake .. ; make -j1 ; make install
+    wget -O vtk_7_1_0.tar.bz2 https://gitlab.kitware.com/vtk/vtk/-/archive/v7.1.0/vtk-v7.1.0.tar.bz2 ;\
+    tar --bzip2 -xf vtk_7_1_0.tar.bz2 ; rm -f vtk_7_1_0.tar.bz2 ; mv vtk-v7.1.0 vtk_7_1_0 ;\
+    cd vtk_7_1_0 ; mkdir build ; cd build ; cmake .. ; make -j1 ; make install
 
 RUN cd /SOURCE ;\
     git clone https://github.com/PointCloudLibrary/pcl.git ;\
     cd pcl ; git checkout tags/pcl-1.8.0 ; rm -rf .git ;\
     mkdir build ; cd build ; cmake .. ; make -j1 ; make install
+
+RUN echo /usr/local/lib >> /etc/ld.so.conf ;\
+    ldconfig
 
 COPY [ ".bashrc" , ".vimrc" , "/root/" ]
 
