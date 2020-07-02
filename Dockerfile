@@ -32,7 +32,7 @@ RUN mkdir -p /SOURCE /data
 RUN apt-get -y update ;\
     apt-get -y install \
         build-essential autotools-dev libicu-dev libbz2-dev python-dev \
-        freeglut3-dev libjsoncpp-dev libpcap-dev
+        freeglut3-dev libjsoncpp-dev libcurl4-openssl-dev libpcap-dev
 
 RUN cd /SOURCE ;\
     wget https://sourceforge.net/projects/boost/files/boost/1.61.0/boost_1_61_0.tar.bz2 ;\
