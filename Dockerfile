@@ -1,14 +1,14 @@
 # Dockerfile for building general development
 # environment for orbital
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 LABEL maintainer "michaelchan_wahyan@yahoo.com.hk"
 
 ENV SHELL=/bin/bash \
     TZ=Asia/Hong_Kong \
     PYTHONIOENCODING=UTF-8 \
-    PATH=/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/lib:/usr/local/lib:/SOURCE/orbital/build:/SOURCE/pcl/build:/SOURCE/pcl/build/lib:/SOURCE/vtk_7_0_0/build:/SOURCE/vtk_7_0_0/build/lib \
-    LD_LIBRARY_PATH=/usr/local/lib:/SOURCE/orbital/build:/SOURCE/pcl/build:/SOURCE/pcl/build/lib:/SOURCE/vtk_7_0_0/build:/SOURCE/vtk_7_0_0/build/lib \
-    LIBRARY_PATH=/SOURCE/pcl/build:/SOURCE/pcl/build/lib:/SOURCE/vtk_7_0_0/build:/SOURCE/vtk_7_0_0/build/lib \
+    PATH=/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/lib:/usr/local/lib:/SOURCE/orbital/build:/SOURCE/pcl/build:/SOURCE/pcl/build/lib:/SOURCE/vtk_7_1_0/build:/SOURCE/vtk_7_1_0/build/lib \
+    LD_LIBRARY_PATH=/usr/local/lib:/SOURCE/orbital/build:/SOURCE/pcl/build:/SOURCE/pcl/build/lib:/SOURCE/vtk_7_1_0/build:/SOURCE/vtk_7_1_0/build/lib \
+    LIBRARY_PATH=/SOURCE/pcl/build:/SOURCE/pcl/build/lib:/SOURCE/vtk_7_1_0/build:/SOURCE/vtk_7_1_0/build/lib \
     CPLUS_INCLUDE_PATH=/SOURCE/orbital \
     BOOST_SYSTEM_LIBRARY=/SOURCE/boost-1.61.0/bin.v2/libs
 
@@ -32,12 +32,11 @@ RUN mkdir -p /SOURCE /data
 RUN apt-get -y update ;\
     apt-get -y install \
         build-essential autotools-dev libicu-dev libbz2-dev python-dev \
-        freeglut3-dev libjsoncpp-dev libpcap-dev
+        freeglut3-dev libjsoncpp-dev libcurl4-openssl-dev libpcap-dev
 
 RUN cd /SOURCE ;\
     wget https://cmake.org/files/v3.10/cmake-3.10.2-Linux-x86_64.tar.gz ;\
-    tar -zxvf cmake-3.10.2-Linux-x86_64.tar.gz ; rm -f cmake-3.10.2-Linux-x86_64.tar.gz ; mv cmake-3.10.2-Linux-x86_64 cmake_3_10_2 ;\
-    cd cmake_3_10_2 ; mkdir build ; cd build ; cmake .. ; make -j4
+    tar -zxvf cmake-3.10.2-Linux-x86_64.tar.gz ; rm -f cmake-3.10.2-Linux-x86_64.tar.gz ; mv cmake-3.10.2-Linux-x86_64 cmake_3_10_2
 
 RUN cd /SOURCE ;\
     wget https://sourceforge.net/projects/boost/files/boost/1.61.0/boost_1_61_0.tar.bz2 ;\
@@ -47,22 +46,25 @@ RUN cd /SOURCE ;\
 RUN cd /SOURCE ;\
     wget -O eigen_3_2_8.tar.bz2 http://bitbucket.org/eigen/eigen/get/3.2.8.tar.bz2 ;\
     tar --bzip2 -xf eigen_3_2_8.tar.bz2 ; rm -f eigen_3_2_8.tar.bz2 ; mv eigen-eigen-* eigen_3_2_8 ;\
-    cd eigen_3_2_8 ; mkdir build ; cd build ; /SOURCE/cmake_3_10_2/build/bin/cmake .. ; make -j1 ; make install
+    cd eigen_3_2_8 ; mkdir build ; cd build ; /SOURCE/cmake_3_10_2/bin/cmake .. ; make -j1 ; make install
 
 RUN cd /SOURCE ;\
     wget -O flann_1_8_4-src.zip http://www.cs.ubc.ca/research/flann/uploads/FLANN/flann-1.8.4-src.zip ;\
     unzip flann_1_8_4-src.zip ; rm -f flann_1_8_4-src.zip ; mv flann-1.8.4-src flann_1_8_4 ;\
-    cd flann_1_8_4 ; mkdir build ; cd build ; /SOURCE/cmake_3_10_2/build/bin/cmake .. ; make -j1 ; make install
+    cd flann_1_8_4 ; mkdir build ; cd build ; /SOURCE/cmake_3_10_2/bin/cmake .. ; make -j1 ; make install
 
 RUN cd /SOURCE ;\
-    wget -O vtk_7_0_0.tar.bz2 https://gitlab.kitware.com/vtk/vtk/-/archive/v7.0.0/vtk-v7.0.0.tar.bz2 ;\
-    tar --bzip2 -xf vtk_7_0_0.tar.bz2 ; rm -f vtk_7_0_0.tar.bz2 ; mv vtk-v7.0.0 vtk_7_0_0 ;\
-    cd vtk_7_0_0 ; mkdir build ; cd build ; /SOURCE/cmake_3_10_2/build/bin/cmake .. ; make -j4 ; make install
+    wget -O vtk_7_1_0.tar.bz2 https://gitlab.kitware.com/vtk/vtk/-/archive/v7.1.0/vtk-v7.1.0.tar.bz2 ;\
+    tar --bzip2 -xf vtk_7_1_0.tar.bz2 ; rm -f vtk_7_1_0.tar.bz2 ; mv vtk-v7.1.0 vtk_7_1_0 ;\
+    cd vtk_7_1_0 ; mkdir build ; cd build ; /SOURCE/cmake_3_10_2/bin/cmake .. ; make -j1 ; make install
 
 RUN cd /SOURCE ;\
-    git clone https://github.com/PointCloudLibrary/pcl.git ;\
-    cd pcl ; git checkout tags/pcl-1.8.0 ; rm -rf .git ;\
-    mkdir build ; cd build ; /SOURCE/cmake_3_10_2/build/bin/cmake .. ; make -j4 ; make install
+    wget https://github.com/PointCloudLibrary/pcl/archive/pcl-1.8.0.tar.gz ;\
+    tar -zxvf pcl-1.8.0.tar.gz ; rm -f pcl-1.8.0.tar.gz ; mv pcl-pcl-1.8.0 pcl ;\
+    cd pcl ; mkdir build ; cd build ; cmake .. ; make -j1 ; make install
+
+RUN echo /usr/local/lib >> /etc/ld.so.conf ;\
+    ldconfig
 
 COPY [ ".bashrc" , ".vimrc" , "/root/" ]
 
