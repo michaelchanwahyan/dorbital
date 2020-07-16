@@ -46,22 +46,22 @@ RUN cd /SOURCE ;\
 RUN cd /SOURCE ;\
     wget -O eigen_3_2_8.tar.bz2 http://bitbucket.org/eigen/eigen/get/3.2.8.tar.bz2 ;\
     tar --bzip2 -xf eigen_3_2_8.tar.bz2 ; rm -f eigen_3_2_8.tar.bz2 ; mv eigen-eigen-* eigen_3_2_8 ;\
-    cd eigen_3_2_8 ; mkdir build ; cd build ; /SOURCE/cmake_3_10_2/bin/cmake .. ; make -j1 ; make install
+    cd eigen_3_2_8 ; mkdir build ; cd build ; /SOURCE/cmake_3_10_2/bin/cmake .. ; make -j4 ; make install
 
 RUN cd /SOURCE ;\
     wget -O flann_1_8_4-src.zip http://www.cs.ubc.ca/research/flann/uploads/FLANN/flann-1.8.4-src.zip ;\
     unzip flann_1_8_4-src.zip ; rm -f flann_1_8_4-src.zip ; mv flann-1.8.4-src flann_1_8_4 ;\
-    cd flann_1_8_4 ; mkdir build ; cd build ; /SOURCE/cmake_3_10_2/bin/cmake .. ; make -j1 ; make install
+    cd flann_1_8_4 ; mkdir build ; cd build ; /SOURCE/cmake_3_10_2/bin/cmake .. ; make -j4 ; make install
 
 RUN cd /SOURCE ;\
     wget -O vtk_7_1_0.tar.bz2 https://gitlab.kitware.com/vtk/vtk/-/archive/v7.1.0/vtk-v7.1.0.tar.bz2 ;\
     tar --bzip2 -xf vtk_7_1_0.tar.bz2 ; rm -f vtk_7_1_0.tar.bz2 ; mv vtk-v7.1.0 vtk_7_1_0 ;\
-    cd vtk_7_1_0 ; mkdir build ; cd build ; /SOURCE/cmake_3_10_2/bin/cmake .. ; make -j1 ; make install
+    cd vtk_7_1_0 ; mkdir build ; cd build ; /SOURCE/cmake_3_10_2/bin/cmake .. ; make -j4 ; make install
 
 RUN cd /SOURCE ;\
     wget https://github.com/PointCloudLibrary/pcl/archive/pcl-1.8.0.tar.gz ;\
     tar -zxvf pcl-1.8.0.tar.gz ; rm -f pcl-1.8.0.tar.gz ; mv pcl-pcl-1.8.0 pcl ;\
-    cd pcl ; mkdir build ; cd build ; cmake .. ; make -j1 ; make install
+    cd pcl ; mkdir build ; cd build ; cmake .. ; make -j4 ; make install
 
 RUN echo /usr/local/lib >> /etc/ld.so.conf ;\
     ldconfig
