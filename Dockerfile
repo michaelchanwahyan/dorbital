@@ -44,8 +44,8 @@ RUN cd /SOURCE ;\
     cd boost_1_61_0 ; ./bootstrap.sh ; ./b2 install -j1
 
 RUN cd /SOURCE ;\
-    wget -O eigen_3_2_8.tar.bz2 https://gitlab.com/libeigen/eigen/-/archive/3.2.8/eigen-3.2.8.tar.bz2 ;\
-    tar --bzip2 -xf eigen_3_2_8.tar.bz2 ; rm -f eigen_3_2_8.tar.bz2 ; mv eigen-eigen-* eigen_3_2_8 ;\
+    wget https://gitlab.com/libeigen/eigen/-/archive/3.2.8/eigen-3.2.8.tar.bz2 ;\
+    tar --bzip2 -xf eigen-3.2.8.tar.bz2 ; rm -f eigen-3.2.8.tar.bz2 ; mv eigen-3.2.8 eigen_3_2_8 ;\
     cd eigen_3_2_8 ; mkdir build ; cd build ; /SOURCE/cmake_3_10_2/bin/cmake .. ; make -j4 ; make install
 
 RUN cd /SOURCE ;\
